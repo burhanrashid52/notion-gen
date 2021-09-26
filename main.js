@@ -1,35 +1,41 @@
 const {Client} = require("@notionhq/client")
+const {readConfig} = require("./lib/file")
 // Initializing a client
-let notionSecretToken = 'removed';
+const notionSecretToken = readConfig().secretToken;
 const notion = new Client({
     auth: notionSecretToken,
 });
 
-const generateDatesDatabaseId = "removed";
-
-async function main() {
+async function main(tableDetails) {
     const args = process.argv.slice(2);
-    const startDate = new Date(args[0]);
-    const endDate = new Date(args[1]);
+    const startDate = new Date(tableDetails.startDate);
+    const endDate = new Date(tableDetails.endDate);
     const datesRange = getDaysArray(startDate, endDate);
     for (let itemDate of datesRange) {
         console.log("Creating page for " + itemDate)
-        await createPage(itemDate);
+        await createPage(itemDate, tableDetails);
     }
     return "Done";
 }
 
-function createPage(givenDate) {
+module.exports = {
+    main: main,
+};
+
+function createPage(givenDate, tableDetails) {
+    const databaseId = tableDetails.databaseId;
+    const titleName = tableDetails.pageTitleColumnName;
+    const dateName = tableDetails.dateColumnName;
     return notion.pages.create({
         parent: {
-            database_id: generateDatesDatabaseId,
+            database_id: databaseId,
         },
         icon: {
             type: "emoji",
             emoji: "📙"
         },
         properties: {
-            Name: {
+            [titleName]: {
                 title: [
                     {
                         text: {
@@ -38,7 +44,7 @@ function createPage(givenDate) {
                     },
                 ],
             },
-            Date: {
+            [dateName]: {
                 date: {
                     start: formatDateForNotion(givenDate),
                 }
@@ -86,5 +92,3 @@ function formatDateForNotion(givenDate) {
     })
     return givenDate.getFullYear() + "-" + month + "-" + day;
 }
-
-main().then(r => console.log(r))
