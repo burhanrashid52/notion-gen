@@ -1,11 +1,11 @@
 const {Client} = require("@notionhq/client")
 // Initializing a client
-let notionSecretToken = '***REMOVED***';
+let notionSecretToken = 'removed';
 const notion = new Client({
     auth: notionSecretToken,
 });
 
-const generateDatesDatabaseId = "***REMOVED***";
+const generateDatesDatabaseId = "removed";
 
 async function main() {
     const args = process.argv.slice(2);
