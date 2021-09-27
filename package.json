@@ -2,7 +2,7 @@
   "name": "notion-gen",
   "version": "0.0.1",
   "description": "Notion CLI utility for various page generation ",
-  "main": "notion-gen.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node --experimental-modules src/index.mjs"
@@ -17,7 +17,6 @@
     "clui": "^0.3.6",
     "commander": "^8.2.0",
     "configstore": "^6.0.0",
-    "dotenv": "^10.0.0",
     "figlet": "^1.5.2",
     "inquirer": "^8.1.5",
     "minimist": "^1.2.5"

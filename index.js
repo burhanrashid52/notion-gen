@@ -1,34 +1,28 @@
-const file = require('./lib/file');
-const {main, init} = require('./main');
-
-
+const config = require('./lib/config');
+const notion = require('./lib/notion');
+const inquirer = require('./lib/inquirer');
 const chalk = require('chalk');
 const clear = require('clear');
 const {textSync} = require('figlet');
 const {program} = require('commander');
-const inquirer = require('./lib/inquirer');
-require('dotenv').config()
 
 
 const setupNotionSecret = async () => {
     const credentials = await inquirer.askNotionSecretToken();
-    file.saveConfig(credentials);
+    config.save(credentials);
 };
 
 program.version('0.0.1')
 program
     .command('init')
-    .description('Setup notion api')
+    .description('Setup notion config')
     .action(async (name, options, command) => {
-            const config = file.readConfig();
-            if (config.secretToken) {
-                console.log(
-                    chalk.green('Already a have secret token!')
-                );
-                return;
-            }
-
             clear();
+            if (config.exists()) {
+                console.log(
+                    chalk.yellow('Already have config! This will override the existing config')
+                );
+            }
             console.log(
                 chalk.yellow(
                     textSync('Notion Gen', {horizontalLayout: 'full'})
@@ -42,21 +36,17 @@ program
     .command('generate-dates <starDate> <endDate>')
     .description('Create notion pages on give date range')
     .action(async (starDate, endDate) => {
-            const config = file.readConfig();
-            if (config.secretToken) {
-                const result = await inquirer.askDatabaseDetails();
+            if (config.exists()) {
+                const result = await inquirer.askTableDetails();
                 result.startDate = starDate;
                 result.endDate = endDate;
-                await main(result);
+                await notion.generateDates(result);
                 return;
             }
             console.log(
-                chalk.red('No notion config found. Please do use init command')
+                chalk.red('No notion config found. Please use init command')
             );
         }
     );
 
-//program.option('-l, --secret [notionSecret]', 'notion secret token')
-
 program.parse(process.argv);
-//console.log("Args :" + program.notionSecret);
