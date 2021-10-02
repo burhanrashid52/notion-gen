@@ -1,7 +1,7 @@
 {
-  "name": "notion-gen",
+  "name": "@burhanrashid52/notion-gen",
   "version": "0.0.1",
-  "description": "Notion CLI utility for various page generation ",
+  "description": "Notion CLI utility for various page generation",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "Burhanuddin Rashid",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "@notionhq/client": "^0.3.2",
     "chalk": "^4.1.2",
@@ -20,6 +20,9 @@
     "figlet": "^1.5.2",
     "inquirer": "^8.1.5",
     "minimist": "^1.2.5"
+  },
+  "repository": {
+    "url": "git://github.com/burhanrashid52/notion-gen.git"
   },
   "bin": {
     "notion-gen": "./index.js"
