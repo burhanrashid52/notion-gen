@@ -41,7 +41,7 @@ https://user-images.githubusercontent.com/14251963/136660451-c8641bf1-2e07-49f2-
 
 ## Contribute
 
-If you have a use case in which you to add this utility then please create the discussion, and then you can create a PR
+If you have a use case in which you to add this utility then please [create the discussion](https://github.com/burhanrashid52/notion-gen/discussions/new), and then you can create a PR
 for it.
 
 ## Questions?🤔
