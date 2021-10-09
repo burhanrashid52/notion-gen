@@ -1,6 +1,6 @@
 {
   "name": "@burhanrashid52/notion-gen",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Notion CLI utility for various page generation",
   "main": "index.js",
   "scripts": {
@@ -24,6 +24,10 @@
   "repository": {
     "url": "git://github.com/burhanrashid52/notion-gen.git"
   },
+  "bugs": {
+    "url": "https://github.com/burhanrashid52/notion-gen/issues"
+  },
+  "homepage": "https://github.com/burhanrashid52/notion-gen#readme",
   "bin": {
     "notion-gen": "./index.js"
   }
